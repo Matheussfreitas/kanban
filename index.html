@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow Board</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand__mark">FB</div>
+          <div>
+            <p class="eyebrow">Workspace</p>
+            <h1>Flow Board</h1>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav">
+          <button class="nav-link nav-link--active" type="button">Quadro</button>
+          <button class="nav-link" type="button">Roadmap</button>
+          <button class="nav-link" type="button">Relatórios</button>
+          <button class="nav-link" type="button">Equipe</button>
+        </nav>
+
+        <section class="sidebar__card">
+          <p class="eyebrow">Sprint atual</p>
+          <h2>Sprint 12</h2>
+          <p>
+            Dados em memória para prototipação rápida. Use o quadro para validar o fluxo
+            visual antes do backend.
+          </p>
+        </section>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Frontend puro</p>
+            <h2>Kanban inspirado em Jira</h2>
+          </div>
+
+          <div class="topbar__actions">
+            <label class="search-field">
+              <span>Buscar</span>
+              <input id="searchInput" type="search" placeholder="Buscar por título ou descrição" />
+            </label>
+
+            <label class="filter-field">
+              <span>Prioridade</span>
+              <select id="priorityFilter">
+                <option value="all">Todas</option>
+                <option value="high">Alta</option>
+                <option value="medium">Média</option>
+                <option value="low">Baixa</option>
+              </select>
+            </label>
+
+            <button id="openModalButton" class="button button--primary" type="button">
+              Nova tarefa
+            </button>
+          </div>
+        </header>
+
+        <section class="summary-grid" id="summaryGrid"></section>
+
+        <section class="board-wrapper">
+          <div class="board-header">
+            <div>
+              <p class="eyebrow">Quadro da sprint</p>
+              <h3>Pipeline de entrega</h3>
+            </div>
+            <p class="board-note">Arraste os cards entre colunas para atualizar o status.</p>
+          </div>
+
+          <section class="board" id="board"></section>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal" id="taskModal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal="true"></div>
+      <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal__header">
+          <div>
+            <p class="eyebrow">Gerenciamento de tarefa</p>
+            <h3 id="modalTitle">Nova tarefa</h3>
+          </div>
+          <button class="icon-button" id="closeModalButton" type="button" aria-label="Fechar">
+            ×
+          </button>
+        </div>
+
+        <form id="taskForm" class="task-form">
+          <input id="taskId" type="hidden" />
+
+          <label>
+            <span>Título</span>
+            <input id="titleInput" name="title" type="text" maxlength="80" required />
+          </label>
+
+          <label>
+            <span>Descrição</span>
+            <textarea id="descriptionInput" name="description" rows="4" maxlength="180"></textarea>
+          </label>
+
+          <div class="task-form__grid">
+            <label>
+              <span>Status</span>
+              <select id="statusInput" name="status" required></select>
+            </label>
+
+            <label>
+              <span>Prioridade</span>
+              <select id="priorityInput" name="priority" required>
+                <option value="high">Alta</option>
+                <option value="medium">Média</option>
+                <option value="low">Baixa</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="task-form__grid">
+            <label>
+              <span>Responsável</span>
+              <input id="assigneeInput" name="assignee" type="text" maxlength="32" required />
+            </label>
+
+            <label>
+              <span>Prazo</span>
+              <input id="dueDateInput" name="dueDate" type="date" required />
+            </label>
+          </div>
+
+          <label>
+            <span>Tag</span>
+            <input id="tagInput" name="tag" type="text" maxlength="20" placeholder="UI, API, QA..." />
+          </label>
+
+          <div class="modal__actions">
+            <button class="button button--ghost" type="button" id="cancelButton">Cancelar</button>
+            <button class="button button--primary" type="submit">Salvar tarefa</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <template id="summaryCardTemplate">
+      <article class="summary-card">
+        <p class="summary-card__label"></p>
+        <strong class="summary-card__value"></strong>
+        <span class="summary-card__hint"></span>
+      </article>
+    </template>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
