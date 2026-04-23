@@ -10,7 +10,7 @@ function createId() {
 }
 
 function parseDateInput(dateString) {
-  const [year, month, day] = dateString.split("-").map(Number);
+  const [day, month, year] = dateString.split("-").map(Number);
   return new Date(year, month - 1, day);
 }
 
@@ -19,7 +19,7 @@ function getTodayInputValue() {
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, "0");
   const day = String(today.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
+  return `${day}-${month}-${year}`;
 }
 
 let tasks = [
@@ -30,7 +30,7 @@ let tasks = [
     status: "backlog",
     priority: "high",
     assignee: "Ana",
-    dueDate: "2026-04-25",
+    dueDate: "25-04-2026",
     tag: "UI",
   },
   {
@@ -40,7 +40,7 @@ let tasks = [
     status: "progress",
     priority: "medium",
     assignee: "Leo",
-    dueDate: "2026-04-27",
+    dueDate: "27-04-2026",
     tag: "UX",
   },
   {
@@ -50,7 +50,7 @@ let tasks = [
     status: "review",
     priority: "high",
     assignee: "Bia",
-    dueDate: "2026-04-29",
+    dueDate: "29-04-2026",
     tag: "QA",
   },
   {
@@ -60,7 +60,7 @@ let tasks = [
     status: "done",
     priority: "low",
     assignee: "Caio",
-    dueDate: "2026-04-22",
+    dueDate: "22-04-2026",
     tag: "Docs",
   },
 ];
